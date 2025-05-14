@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -21,13 +21,13 @@ export default function LoginScreen({ navigation }) {
                 />
             </View>
 
-            <View  >
-                <Button
-                    title='entrar'
-                    color = '#626ca8'
-                    
+            <View style={styles.button}>
+                <TouchableOpacity 
+                    style={styles.buttonContainer} 
                     onPress={() => navigation.navigate('Home')}
-                />
+                >
+                    <Text style={styles.buttonText}>Entrar</Text>
+                </TouchableOpacity>
             </View>
 
         </View>
@@ -55,5 +55,21 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
 
+    button: {
+        width: windowWidth * 0.6,
+        borderRadius: 8,
+    },
+
+    buttonContainer: {
+        backgroundColor: '#626ca8',
+        padding: 10,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+
+    buttonText: {
+        color: '#ffffff',
+        fontSize: 16,
+    }
 
 })
