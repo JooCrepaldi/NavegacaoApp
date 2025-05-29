@@ -11,6 +11,7 @@ export default function LoginScreen({ navigation }) {
             <View>
                 <TextInput style={styles.input}
                     placeholder='email'
+                    valeu={emailVal}
                 />
             </View>
 
@@ -18,6 +19,7 @@ export default function LoginScreen({ navigation }) {
                 <TextInput style={styles.input}
                     placeholder='senha'
                     keyboardType='numeric'
+                    valeu={senhaVal}
                 />
             </View>
 
