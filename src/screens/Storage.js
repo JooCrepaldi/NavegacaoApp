@@ -1,38 +1,29 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect } from "react";
+//import { useEffect } from "react";
 
 const [emailVal, setEmail] = useState('');
 const [senhaVal, setSenha] = useState('');
 
-//função para salvar o email
-const saveEmail = async (e) => {
+const saveData = async() => {
     try {
-        await AsyncStorage.setItem('emailVal', JSON.stringify(e));//na função "salvarEmail", é utilizada o método setItem(pegando o valor de email) e transforma em string
-    } catch (error) {
-        console.log('Erro ao salvar o email', error);//se não der certo, é pegado um erro e printado
-    }
-};
+        email = emailVal;
+        senha = senhaVal;
 
-//função para salvar a senha
-const saveSenha = async (e) => {
-    try {
-        await AsyncStorage.setItem('senhaVal', JSON.stringify(e));//é feito a mesma coisa para o senha
-    } catch (error) {
-        console.log('Erro ao salvar o senha', error);
-    }
-};
+        await AsyncStorage.setItem('usuario', JSON.stringify(email));//salva os dados?
+        await AsyncStorage.setItem('usuario', JSON.stringify(senha));
 
-useEffect(() => {// detector de eventos
-    const loadHome = async () => {
-        const storedEmail = await AsyncStorage.getItem('emailVal');//verificando o valor salvo
-        const storedSenha = await AsyncStorage.getItem('senhaVal');
-
-        if (saveEmail !== null && saveSenha !== null) {
-            navigation.navigate('Home');
-        } else {
-            navigation.navigate('Login');
+        if (email && senha) {//verifica se existe um cadastro
+            Alert.alert('Erro', 'Este email já está cadastrado.');
+            return;
         }
-    };
+    }catch(erro){
+        console.error('Erro ao salvar:', erro);
+    }
+};
 
-    loadHome();
-}[navigation]);
+
+/*
+    pegar os dados do input
+    verifica se o usuário registrou pela primeira vez
+    se for registrado de novo o mesmo input, pular tela de login
+*/
