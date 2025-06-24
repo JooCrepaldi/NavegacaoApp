@@ -13,15 +13,13 @@ const Stack = createStackNavigator();
 
 export default function App() {
 
-  const loginState = AsyncStorage.getItem('usuario');
-
-  if (loginState === 'true') {
-      setLoginState(true);
-  } 
+  let loginState = AsyncStorage.getItem('usuario');
+  if (loginState == "true") loginState = true;
+  if (loginState == "false") loginState = false;
 
   return (
     <NavigationContainer>
-    <Stack.Navigator initialRouteName={isLoggedIn ? 'Home' : 'Login'}>
+    <Stack.Navigator initialRouteName={loginState ? 'Home' : 'Login'}>
         <Stack.Screen name = "Login" component={LoginScreen} options={{headerShown: false}}/>
         <Stack.Screen name = "Home" component={HomeScreen} options={{headerShown: false}}/>
         <Stack.Screen name = "Details" component={DetailsScreen} options={{headerShown: false}}/>
